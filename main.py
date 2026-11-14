@@ -1,18 +1,19 @@
-# Round 2 entry: copy the bundled entry.png byte-for-byte to the output dir.
+"""Food-picture entry: copy the bundled image to the output directory.
+
+The image itself is the entry; this program only places it where the
+grader expects it, deterministically and without any network access.
+"""
+
 import os
 import shutil
-import sys
 
 
 def main():
-    here = os.path.dirname(os.path.abspath(__file__))
-    src = os.path.join(here, "entry.png")
     out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
     os.makedirs(out_dir, exist_ok=True)
-    dst = os.path.join(out_dir, "entry.png")
-    shutil.copyfile(src, dst)
-    return 0
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "entry.png")
+    shutil.copyfile(src, os.path.join(out_dir, "entry.png"))
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
